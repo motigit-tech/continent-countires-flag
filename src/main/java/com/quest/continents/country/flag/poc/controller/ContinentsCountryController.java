@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @AuditAndMeter(value = {AuditAndMeterInterceptor.class})
 public class ContinentsCountryController {
-
+	
+    @Autowired
 	ContinentCountriesFlagService continentCountriesFlagService;
 		
 	@RequestMapping(value = "/continents", method = RequestMethod.GET, 
@@ -58,8 +60,8 @@ public class ContinentsCountryController {
 			produces = "application/json; charset=UTF-8")
 	public ResponseEntity<?> getContinentFlags(@Valid @RequestBody SearchCriteria searchCriteria) {
 		Optional<SearchCriteria> checkSearchCriteriaNull = Optional.ofNullable(searchCriteria);
-		if (checkSearchCriteriaNull.isPresent() || null == checkSearchCriteriaNull.get().getFieldName()) {
-
+		if (!checkSearchCriteriaNull.isPresent() || null == checkSearchCriteriaNull.get().getFieldName()) {
+			
 			return new ResponseEntity<List<Continent>>(continentCountriesFlagService.findAll(), HttpStatus.OK);
 
 		} else if (checkSearchCriteriaNull.get().getFieldName().equals("continent")) {
