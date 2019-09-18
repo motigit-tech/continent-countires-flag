@@ -22,5 +22,9 @@ public class SearchCriteria {
 	public SearchCriteria() {
 		
 	}
+	public SearchCriteria(String fieldName, String fieldValue) {
+		this.fieldName = fieldName;
+		this.fieldValue = fieldValue;
+	}
 
 }

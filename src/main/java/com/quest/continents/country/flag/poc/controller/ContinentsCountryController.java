@@ -8,7 +8,8 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.quest.continents.country.flag.poc.ContinentsCountryFlagPocApplication;
 import com.quest.continents.country.flag.poc.model.Continent;
 import com.quest.continents.country.flag.poc.model.Country;
 import com.quest.continents.country.flag.poc.model.SearchCriteria;
@@ -33,7 +35,8 @@ import lombok.extern.slf4j.Slf4j;
 @AuditAndMeter(value = {AuditAndMeterInterceptor.class})
 public class ContinentsCountryController {
 	
-    @Autowired
+	//private static final Logger log =  LoggerFactory.getLogger(ContinentsCountryController.class);
+
 	ContinentCountriesFlagService continentCountriesFlagService;
 		
 	@RequestMapping(value = "/continents", method = RequestMethod.GET, 
@@ -54,13 +57,20 @@ public class ContinentsCountryController {
 		return continentCountriesFlagService.findByCountryId(countryName);
 	}
 	
-
+     /*
+      * getContinentCountriesFlag: It's generic rest api service which has providing continent's country
+      *  and specific country flag.
+      *  @RequestBody SearchCriteria
+      *  @Return Json response
+      */
 	@RequestMapping(value = "/", method = { RequestMethod.GET,
 			RequestMethod.POST }, headers = "Accept=application/json", consumes = MediaType.APPLICATION_JSON_VALUE, 
 			produces = "application/json; charset=UTF-8")
-	public ResponseEntity<?> getContinentFlags(@Valid @RequestBody SearchCriteria searchCriteria) {
+	public ResponseEntity<?> getContinentCountriesFlag(@Valid @RequestBody SearchCriteria searchCriteria) {
+		
+		//log.info("ContinentsCountryController::getContinentCountriesFlag: start");
 		Optional<SearchCriteria> checkSearchCriteriaNull = Optional.ofNullable(searchCriteria);
-		if (!checkSearchCriteriaNull.isPresent() || null == checkSearchCriteriaNull.get().getFieldName()) {
+		if (checkSearchCriteriaNull.isPresent() || null == checkSearchCriteriaNull.get().getFieldName()) {
 			
 			return new ResponseEntity<List<Continent>>(continentCountriesFlagService.findAll(), HttpStatus.OK);
 

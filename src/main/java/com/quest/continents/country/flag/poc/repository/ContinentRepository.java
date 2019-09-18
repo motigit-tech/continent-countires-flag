@@ -11,7 +11,7 @@ import com.quest.continents.country.flag.poc.model.Country;
 
 
 
-@Repository
+@Repository("continentRepository")
 public interface ContinentRepository extends MongoRepository<Continent, String> {
 	
 	@Query(value = "{ 'continent' : ?0}")

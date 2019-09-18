@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 
 //continents will be the name of collection in mongodb
@@ -12,7 +14,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Continent {
 
 	@Id
+	@Field("continent")
 	private String continent;	
+	
+	@DBRef
 	private List <Country> countries = new ArrayList<Country>();
 	
 	public Continent(String continent, List<Country> countries) {

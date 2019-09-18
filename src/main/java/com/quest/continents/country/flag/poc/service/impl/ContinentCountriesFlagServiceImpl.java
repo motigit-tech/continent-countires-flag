@@ -8,23 +8,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.quest.continents.country.flag.poc.dao.CountryFlagDao;
 import com.quest.continents.country.flag.poc.model.Continent;
 import com.quest.continents.country.flag.poc.model.Country;
 import com.quest.continents.country.flag.poc.repository.ContinentRepository;
 import com.quest.continents.country.flag.poc.repository.CountryRepository;
 
-@Service
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service("continentCountriesFlagService")
 public class ContinentCountriesFlagServiceImpl implements ContinentCountriesFlagService {
 	
 	@Autowired
 	ContinentRepository continentRepository;
 	
 	@Autowired
-	CountryRepository countryFlagRepository;
-
-	@Autowired
-	CountryFlagDao countryFlagDao;
+	CountryRepository countryFlagRepository;	
 
 	@Override
 	public List<Country> findByContientId(String continent) {
