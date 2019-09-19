@@ -3,21 +3,24 @@ package com.quest.continents.country.flag.poc.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 
 //continents will be the name of collection in mongodb
-@Document(collection = "continent")
+@Document(collection = "continentcollection")
 public class Continent {
 
+	
 	@Id
+    private ObjectId id;
+	
 	@Field("continent")
 	private String continent;	
 	
-	@DBRef
+	@Field("countries")
 	private List <Country> countries = new ArrayList<Country>();
 	
 	public Continent(String continent, List<Country> countries) {

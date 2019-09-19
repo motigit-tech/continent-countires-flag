@@ -14,11 +14,12 @@ import com.quest.continents.country.flag.poc.model.Country;
 @Repository("continentRepository")
 public interface ContinentRepository extends MongoRepository<Continent, String> {
 	
-	@Query(value = "{ 'continent' : ?0}")
-	List<Country> findByContinentName(final String continent);
+			  
+	   @Query(value = "{ 'continent' : ?0}", fields = "{ 'continent.countries.name' : 1, 'countries.flag' : 2 }")
+	   List<Country> findByContinentName(final String continent);
 
-	  @Query("{'countries.country': ?0}")
-	  Country findByCountry(final String country);
+	   @Query("{'countries.name': ?0}")
+	   Country findByCountry(final String country);
 
 	
-}
+} 

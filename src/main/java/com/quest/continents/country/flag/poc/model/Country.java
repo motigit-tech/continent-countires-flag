@@ -4,7 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 //continents will be the name of collection in mongodb
-@Document(collection = "continent")
+@Document(collection = "continentcollection")
 public class Country {
 
 	@Id

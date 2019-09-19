@@ -16,6 +16,7 @@ import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 
 import com.quest.continents.country.flag.poc.model.Continent;
+import com.quest.continents.country.flag.poc.model.Country;
 import com.quest.continents.country.flag.poc.repository.ContinentRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -38,11 +39,17 @@ public class ContinentsCountryFlagPocApplication {
 
 	        return args -> {
 
-	        	 List <Continent>list =  continentRepository.findAll();
+	        	 List<Country>list =  continentRepository.findByContinentName("Africa");
+	        	list.forEach((c) -> {
+	            	System.out.println(c.getName()+" "+c.getFlag());
+	            	}); 
+	        	
+	        	 List<Continent>cList =  continentRepository.findAll();
 	            
-	            list.forEach((c) -> {
+	        	 cList.forEach((c) -> {
 	            	System.out.println(c.getContinent());
-	            	});                    
+	            	});   
+	            	                 
 
 	        };
 	 	}
