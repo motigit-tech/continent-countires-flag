@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.quest.continents.country.flag.poc.dao.CountryFlagDao;
 import com.quest.continents.country.flag.poc.model.Continent;
-import com.quest.continents.country.flag.poc.model.Country;
+import com.quest.continents.country.flag.poc.model.Countries;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,10 +30,10 @@ public class CountryFlagDaoImpl implements CountryFlagDao{
 	}
 
 	@Override
-	public Country findByCountryId(String country) {
+	public Countries findByCountryId(String country) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("country").is(country));
-		return mongoTemplate.findOne(query, Country.class);
+		return mongoTemplate.findOne(query, Countries.class);
 	}
 	
 

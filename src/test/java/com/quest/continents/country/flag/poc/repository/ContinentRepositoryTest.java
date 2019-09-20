@@ -26,9 +26,9 @@ public class ContinentRepositoryTest {
     }
     
        
-    @Ignore @Test
+   @Ignore @Test
     public void testExists() {   
-        assertEquals(1, continentRepo.findByContinentName("Amerika").size());
+        assertEquals(1, continentRepo.findByContinentName("America"));
      }
 
    

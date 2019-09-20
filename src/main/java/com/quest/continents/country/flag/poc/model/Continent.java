@@ -1,45 +1,68 @@
+/**
+ * @author Moti
+ */
 package com.quest.continents.country.flag.poc.model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
+public class Continent implements Serializable
+{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1182745813564234412L;
+	
+	/** The continent. */
+	private String continent;
+	
+	/** The countries. */
+	private List<Countries> countries;
+	
 
-//continents will be the name of collection in mongodb
-@Document(collection = "continentcollection")
-public class Continent {
-
-	
-	@Id
-    private ObjectId id;
-	
-	@Field("continent")
-	private String continent;	
-	
-	@Field("countries")
-	private List <Country> countries = new ArrayList<Country>();
-	
-	public Continent(String continent, List<Country> countries) {
+    public Continent(String continent, List<Countries> countries) {
 		super();
 		this.continent = continent;
 		this.countries = countries;
 	}
-	
-	public String getContinent() {
-		return continent;
-	}
-	public void setContinent(String continent) {
-		this.continent = continent;
-	}
-	public List<Country> getCountries() {
-		return countries;
-	}
-	public void setCountries(List<Country> countries) {
-		this.countries = countries;
-	}
-	
+
+    /**
+	 * Gets the continent.
+	 *
+	 * @return the continent
+	 */
+    public String getContinent ()
+    {
+        return continent;
+    }
+
+    public void setContinent (String continent)
+    {
+        this.continent = continent;
+    }
+    
+    /**
+	 * Gets the countries.
+	 *
+	 * @return the countries
+	 */
+    public List<Countries> getCountries ()
+    {
+        return countries;
+    }
+
+    public void setCountries (List<Countries> countries)
+    {
+        this.countries = countries;
+    }
+    
+    /* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+    @Override
+    public String toString()
+    {
+        return "ClassPojo [continent = "+continent+", countries = "+countries+"]";
+    }
 }
